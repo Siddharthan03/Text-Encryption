@@ -1,0 +1,92 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0; /* Fallback color */
+    background-image: url('/static/images/Text.jpg'); /* Corrected image path */
+    background-size: cover; /* Cover the entire body */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Prevent repeating the image */
+}
+
+.container {
+    margin: 50px auto;
+    width: 60%;
+    background-color: rgba(255, 255, 255, 0.4); /* Slightly transparent white for better visibility */
+    padding: 25px;
+    box-shadow: 0px 0px 10px #ccc;
+}
+
+h2 {
+    text-align: center;
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+select, input[type="text"], textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px;
+    width: 100%;
+    background-color: #007bff; /* Blue background color */
+    color: white; /* White text color */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Optional rounded corners */
+    cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+
+/* Styles for result and error boxes */
+.result, .error {
+    margin-top: 20px;
+    padding: 15px;
+    word-break: break-all;
+}
+
+/* Result box styling */
+.key-box {
+    background-color: #e3f2fd; /* Light blue background for keys */
+    border-left: 5px solid #2196F3; /* Blue left border */
+    border-radius: 5px; /* Optional rounded corners for key boxes */
+    margin-top: 20px; /* Space between boxes */
+    padding: 15px; /* Padding inside the box */
+    word-break: break-all; /* Break long words */
+    overflow-wrap: break-word; /* Break words at the end of the line */
+}
+
+.key-textarea {
+    width: 100%; /* Full width */
+    height: auto; /* Adjust height automatically based on rows */
+    padding: 10px; /* Padding inside the textarea */
+    border: none; /* No border */
+    background-color: transparent; /* Transparent background */
+    resize: none; /* Prevent resizing */
+    color: black; /* Show text color */
+}
+
+.result {
+    background-color: #e8f5e9; /* Light green background for results */
+    border-left: 5px solid #4caf50; /* Green left border */
+    border-radius: 5px; /* Optional rounded corners for result box */
+    margin-top: 20px; /* Space between boxes */
+    padding: 15px; /* Padding inside the box */
+}
+
+.error {
+    background-color: #ffebee; /* Light red background for errors */
+    border-left: 5px solid #f44336; /* Red left border */
+    border-radius: 5px; /* Optional rounded corners for error box */
+    margin-top: 20px; /* Space between boxes */
+    padding: 15px; /* Padding inside the box */
+}

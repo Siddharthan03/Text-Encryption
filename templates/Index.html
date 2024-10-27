@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Text Encryption and Decryption</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <script>
+        // Function to fetch RSA public key and populate the key textarea when RSA is selected
+        function handleMethodChange() {
+            const methodSelect = document.getElementById('method');
+            const keyField = document.getElementById('key');
+
+            // Clear the key field when changing methods
+            keyField.value = '';
+
+            if (methodSelect.value === 'rsa') {
+                // Fetch RSA keys from the server only for encryption
+                fetch('/generate_rsa_keys')
+                    .then(response => response.json())
+                    .then(data => {
+                        // Populate the key field with only the public key (for encryption)
+                        if (document.getElementById('action').value === 'encrypt') {
+                            keyField.value = data.public_key;  // Only set for encryption
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error fetching RSA keys:', error);
+                    });
+            }
+        }
+
+        // Event listener for when the method is changed
+        window.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('method').addEventListener('change', handleMethodChange);
+            document.getElementById('action').addEventListener('change', () => {
+                // Clear key field when action changes
+                document.getElementById('key').value = '';
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Text Encryption and Decryption</h2>
+        <form method="POST">
+            <label for="action">ACTION:</label>
+            <select name="action" id="action">
+                <option value="encrypt">Encrypt</option>
+                <option value="decrypt">Decrypt</option>
+            </select>
+
+            <label for="method">Method:</label>
+            <select name="method" id="method">
+                <option value="aes">AES</option>
+                <option value="des">DES</option>
+                <option value="rsa">RSA</option>
+            </select>
+
+            <label for="key">KEY:</label>
+            <textarea name="key" id="key" rows="5" placeholder="Enter your key here..."></textarea>
+
+            <label for="text">TEXT:</label>
+            <textarea name="text" id="text" rows="5" placeholder="Enter text to encrypt/decrypt..."></textarea>
+
+            <button type="submit">Submit</button>
+        </form>
+
+        {% if result %}
+        <div class="result">
+            <strong>Result:</strong> {{ result }}
+        </div>
+        {% endif %}
+        
+        {% if error %}
+        <div class="error">
+            <strong>Error:</strong> {{ error }}
+        </div>
+        {% endif %}
+
+        {% if aes_key %}
+        <div class="key-box">
+            <strong>Generated AES Key:</strong> {{ aes_key }}
+        </div>
+        {% endif %}
+
+        {% if des_key %}
+        <div class="key-box">
+            <strong>Generated DES Key:</strong> {{ des_key }}
+        </div>
+        {% endif %}
+
+        {% if generated_private_key %}
+    <div class="key-box">
+        <strong>Generated RSA Private Key:</strong><br>
+        <textarea rows="10" readonly class="key-textarea">{{ generated_private_key }}</textarea> <!-- Displaying private key in a textarea -->
+    </div>
+        {% endif %}
+    </div>
+</body>
+</html>
